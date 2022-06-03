@@ -1,0 +1,18 @@
+version: '3'
+services:
+    database-practice:
+        image: postgres:latest
+        restart: always
+        environment:
+          - POSTGRES_DB=database-practice
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=docker
+        logging:
+          options:
+            max-size: 10m
+            max-file: "3"
+        ports:
+          - '5433:5432'
+        volumes:
+          - ./postgres-data:/var/lib/postgresql/data
+          - ./car-system/tables.sql:/docker-entrypoint-initdb.d/tables.sql
